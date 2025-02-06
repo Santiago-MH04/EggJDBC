@@ -88,6 +88,16 @@ public class CasaDAO implements CRUD_DAO<Casa> {
             }
                 //Actualizar la base de datos
             PS.executeUpdate();
+
+                //Jugar con el ID de la casa recién guardada
+            if (!(casa.getIdCasa() != null && casa.getIdCasa() > 0)) {
+                    // Obtener el ID generado automáticamente
+                try (ResultSet generatedKeys = PS.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        casa.setIdCasa(generatedKeys.getLong(1));
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
