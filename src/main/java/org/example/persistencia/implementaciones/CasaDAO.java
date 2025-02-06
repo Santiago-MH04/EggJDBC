@@ -66,7 +66,7 @@ public class CasaDAO implements CRUD_DAO<Casa> {
         if (casa.getIdCasa() != null && casa.getIdCasa() > 0) {
             SQL = "UPDATE casas SET fecha_desde = ?, fecha_hasta = ?, precio_habitacion = ? WHERE id_casa = ?";
         } else {
-            SQL = "INSERT INTO productos (fecha_desde, fecha_hasta, precio_habitacion, calle, numero, codigo_postal, ciudad, pais, tipo_vivienda) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            SQL = "INSERT INTO casas (fecha_desde, fecha_hasta, precio_habitacion, calle, numero, codigo_postal, ciudad, pais, tipo_vivienda) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         }
             //Obtener la conexión
         try (Connection Conn = getConnection();
