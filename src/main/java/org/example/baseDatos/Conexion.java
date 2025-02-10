@@ -1,5 +1,7 @@
 package org.example.baseDatos;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,16 +15,30 @@ public class Conexion {
     private static String USERNAME = "root";
     private static String PASSWORD = "sasa";
     private static java.sql.Connection Connection;
+    private static BasicDataSource Pool;
 
 
     //Constructores de Conexion
     //Asignadores de atributos de Conexion (setter)
     //Lectores de atributos de Conexion (getter)
         //Métodos de Conexion
-    public static Connection getInstance() throws SQLException {
-        if(Connection == null){/**/
-            Connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+    public static BasicDataSource getInstance() throws SQLException {
+        if (Pool == null) {
+            Pool = new BasicDataSource();
+            Pool.setUrl(URL);
+            Pool.setUsername(USERNAME);
+            Pool.setPassword(PASSWORD);
+
+            Pool.setInitialSize(3);
+            Pool.setMinIdle(3);
+            Pool.setMaxIdle(8);
+            Pool.setMaxTotal(8);
         }
-        return Connection;
+        return Pool;
+    }
+
+    public static Connection getConnection() throws SQLException{
+        return getInstance().getConnection();
     }
 }
+

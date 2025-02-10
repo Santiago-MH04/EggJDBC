@@ -16,7 +16,7 @@ public class CasaDAO implements CRUD_DAO<Casa> {
     //Lectores de atributos de CasaDAO (getters)
         //Métodos de CasaDAO
     private Connection getConnection() throws SQLException {
-        return Conexion.getInstance();
+        return Conexion.getConnection();
     }
 
     @Override
